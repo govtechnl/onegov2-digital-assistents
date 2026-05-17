@@ -1,0 +1,14 @@
+- term: RAG
+  description: Retrieval-Augmented Generation; combines source retrieval with language-model generation so answers stay grounded in real documents.
+- term: Hallucination
+  description: A model answer that sounds plausible but is factually wrong or unsupported by any source.
+- term: Human-in-the-loop
+  description: A workflow where a human reviews or approves outputs that have legal, financial, or social impact.
+- term: Digital sovereignty
+  description: Public control over data, models, and infrastructure in line with public values.
+- term: Doenvermogen
+  description: The Dutch term for citizens' practical ability to navigate administrative processes, especially under stress.
+- term: LLMOps
+  description: Operational practices for deploying, monitoring, and maintaining large language models in production.
+- term: Guardrail
+  description: A rule, filter, or policy that constrains assistant behaviour to acceptable inputs and outputs.

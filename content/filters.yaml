@@ -1,0 +1,8 @@
+phases:
+  - PoC
+  - Pilot
+  - Production
+levels:
+  - Operational
+  - Tactical
+  - Strategic

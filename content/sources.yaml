@@ -1,0 +1,24 @@
+- id: challenge-brief
+  title: Challenge Brief — Digital Assistants
+  type: challenge
+  url: ./Challenge_Brief_Digitale_Assistenten.docx
+- id: gdpr
+  title: General Data Protection Regulation (GDPR / AVG)
+  type: legislation
+  url: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- id: ai-act
+  title: EU AI Act
+  type: legislation
+  url: https://eur-lex.europa.eu/eli/reg/2024/1689/oj
+- id: nl-ai-impact-assessment
+  title: Impact Assessment Mensenrechten en Algoritmes (IAMA)
+  type: framework
+  url: https://www.rijksoverheid.nl/documenten/rapporten/2021/02/25/impact-assessment-mensenrechten-en-algoritmes
+- id: nl-algorithm-register
+  title: Dutch Algorithm Register
+  type: register
+  url: https://algoritmes.overheid.nl/
+- id: onegov-principles
+  title: OneGov #2 principles (hackathon)
+  type: internal
+  url: https://github.com/govtechnl/onegov2-digital-assistents
