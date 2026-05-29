@@ -23,6 +23,9 @@ When these files exist in the repository, use them to sharpen the audit criteria
 - [Answer quality](../../content/domains/answer-quality.md): answer correctness, relevance, completeness, plain language, and measurable testing.
 - [Security](../../content/domains/security.md): prompt injection, API/tool access, secrets, misuse prevention, output filtering, and audit logging.
 - [Compliance](../../content/domains/compliance.md): applicable law, policy, internal standards, demonstrable compliance, and tracking findings to closure.
+- [User experience](../../content/domains/user-experience.md): accessible, understandable, trustworthy interaction and uncertainty handling.
+- [RAG pipeline](../../content/practices/rag-pipeline.md): citable retrieval, source coverage, source precision, and no-answer behavior.
+- [LLMOps and monitoring](../../content/practices/llmops-monitoring.md): monitoring, representative traces, feedback, regressions, and rollback paths.
 
 Use service-specific official sources, policies, and user-provided documents as the authority for the audit. If a referenced repository resource or required artifact is missing, continue only as far as the evidence allows and list the gap under missing evidence.
 

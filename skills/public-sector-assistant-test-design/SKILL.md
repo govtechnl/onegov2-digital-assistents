@@ -23,6 +23,9 @@ When these files exist in the repository, use them to ground the test criteria:
 - [Answer quality](../../content/domains/answer-quality.md): correctness, completeness, relevance, plain language, and measurable evaluation.
 - [Security](../../content/domains/security.md): prompt injection, API/tool access, secrets, misuse prevention, output filtering, and audit logging.
 - [Compliance](../../content/domains/compliance.md): applicable law, policy, standards, demonstrable compliance, and closure of findings.
+- [User experience](../../content/domains/user-experience.md): accessibility, comprehension, trustworthy interaction, and uncertainty.
+- [RAG pipeline](../../content/practices/rag-pipeline.md): source coverage, source precision, citations, and no-answer behavior.
+- [LLMOps and monitoring](../../content/practices/llmops-monitoring.md): regression sets, representative traces, user feedback, and monitoring signals.
 
 Use the service owner's official sources and user-provided documents as the authority for expected answers. If key artifacts are missing, create tests only for the evidence available and list missing evidence separately.
 
