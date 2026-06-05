@@ -1,0 +1,43 @@
+{
+  "_toelichting": "Werkbestand voor een Algoritmeregister-registratie (Publicatiestandaard v1.0.0). Vul de velden in als platte tekst zonder regeleinden of opsommingen. Valideer met scripts/validate.py. Dit is een tussenformaat voor review; de officiele uploadstructuur leeft in de MinBZK-publicatiestandaard-repo en de eigen registertooling.",
+  "algemene_informatie": {
+    "naam": "",
+    "korte_omschrijving": "",
+    "organisatie": "",
+    "thema": [],
+    "status": "",
+    "begindatum": "",
+    "einddatum": "",
+    "contactgegevens": "",
+    "link_publiekspagina": "",
+    "publicatiecategorie": "",
+    "link_bronregistratie": ""
+  },
+  "verantwoord_gebruik": {
+    "doel_en_impact": "",
+    "afwegingen": "",
+    "menselijke_tussenkomst": "",
+    "risicobeheer": "",
+    "wettelijke_basis": "",
+    "link_wettelijke_basis": "",
+    "titel_wettelijke_basis": "",
+    "verwerkingsregister": "",
+    "impacttoetsen": "",
+    "link_impacttoets": "",
+    "toelichting_impacttoetsen": ""
+  },
+  "werking": {
+    "gegevens": "",
+    "link_gegevensbron": "",
+    "titel_gegevensbron": "",
+    "technische_werking": "",
+    "leverancier": "",
+    "link_broncode": ""
+  },
+  "metadata": {
+    "taal": "nld",
+    "schema": "1.0.0",
+    "bron_id": "",
+    "zoektermen": ""
+  }
+}

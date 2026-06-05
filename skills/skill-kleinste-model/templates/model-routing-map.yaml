@@ -1,0 +1,65 @@
+# =============================================================================
+# model-routing-map.yaml  —  single source of truth for "which model per task"
+# -----------------------------------------------------------------------------
+# Fill this in PER TASK. Rule: start at the smallest tier and escalate only when
+# evals on your golden dataset show it falls short (see the skill's
+# references/right-sizing-method.md). Keep this in config, not hard-coded.
+# Tiers are roles, not vendors — slot in your own models so they stay swappable.
+# Re-review at least yearly and whenever a task, model, or volume changes.
+# =============================================================================
+
+tiers:
+  search:                       # deterministic, no LLM — cheapest + greenest
+    description: "Database / search / fixed-answer route. Prefer this whenever the task is deterministic."
+  small:                        # Tier S
+    model: "<your small/fast model, or fine-tuned SLM>"
+    use_for: "classification, routing, extraction, short FAQ answers"
+  medium:                       # Tier M
+    model: "<your mid-capability model>"
+    use_for: "summarisation, straightforward drafting, moderate reasoning"
+  large:                        # Tier L
+    model: "<your most-capable model>"
+    use_for: "hard multi-step reasoning, ambiguous or high-stakes tasks, complex tool use"
+  human:                        # escalation route
+    description: "Hand off to a person — high-risk or low-confidence cases."
+
+# -----------------------------------------------------------------------------
+# One entry per task the assistant performs. Copy the block as needed.
+# difficulty: note the signals (input complexity, reasoning depth, stakes,
+#             error tolerance, latency, volume) — see right-sizing-method.md.
+# eval_bar:   the quality threshold on the golden dataset this task must meet.
+# escalation: what to do on low confidence / failed validation.
+# -----------------------------------------------------------------------------
+tasks:
+  - name: "needs-LLM? (delete tasks that don't)"
+    description: "Before sizing, confirm this task actually needs a model and isn't a lookup."
+    chosen_route: "search"        # if deterministic, stop here — no model needed
+
+  - name: "intent-classification"
+    description: "Classify the citizen's question into a route/topic."
+    difficulty: "shallow, structured output, low stakes, high volume"
+    chosen_route: "small"
+    eval_bar: "<e.g. >= 0.95 accuracy on the golden set>"
+    escalation: "low confidence -> medium, then human"
+    latency_budget: "<e.g. < 300 ms>"
+    last_reviewed: "<YYYY-MM-DD>"
+
+  - name: "faq-answering"
+    description: "Answer common, low-risk questions (optionally over a small RAG index)."
+    difficulty: "shallow-moderate, low stakes, very high volume"
+    chosen_route: "small"
+    eval_bar: "<e.g. >= 0.90 answer-correctness on the golden set>"
+    escalation: "no confident answer -> medium; sensitive topic -> human"
+    last_reviewed: "<YYYY-MM-DD>"
+
+  - name: "complex-reasoning-or-casework"
+    description: "Multi-step reasoning / synthesis over multiple documents."
+    difficulty: "deep reasoning, open-ended output, higher stakes, low volume"
+    chosen_route: "large"
+    eval_bar: "<define quality threshold; consider human review for decisions>"
+    escalation: "decisions affecting a person -> human-in-the-loop (see skill-IAMA)"
+    notes: "If this affects rights/benefits, check the ai-act-high-risk and skill-IAMA skills."
+    last_reviewed: "<YYYY-MM-DD>"
+
+# routing_strategy: "select-then-route"   # or "cascade" (small first, fall back on low confidence)
+# observability: "log route, model, latency, tokens, errors for every call"

@@ -1,0 +1,67 @@
+# =============================================================================
+# rag-pipeline-config.yaml  —  single source of truth for a RAG pipeline
+# -----------------------------------------------------------------------------
+# Records the pipeline's choices so they are reviewable, swappable, and
+# reproducible. Fill in per solution. Verify every choice on your own corpus
+# with the rag-evaluatie skill — the optimum is corpus-dependent.
+# =============================================================================
+
+sources:
+  whitelist:                      # index ONLY approved, authoritative sources
+    - name: "<authoritative source 1>"
+      uri: "<location>"
+      governed: true
+  exclude_ungoverned_websites: true   # municipal/gov sites are often not reliable enough
+  time_model: "current-only"      # or "current+historical" — decide explicitly
+  lineage_standard: "DCAT-AP-NL 3.0"
+
+ingestion:
+  chunking:
+    strategy: "page-level"        # strong default for mixed corpora; measure alternatives
+    target_size: "<tokens/chars>"
+    keep_metadata: [source_id, title, section, date_version, access_level]
+
+embeddings:
+  model: "<Dutch embedding model, e.g. an E5-NL model>"
+  language: "nl"
+
+vector_store:
+  engine: "<qdrant | milvus | weaviate | elasticsearch>"
+  self_hosted: true               # avoid proprietary cloud vector-DB lock-in
+  metadata_filtering: true        # enforce access level / recency at query time
+  semantic_cache: true            # reuse results for high-frequency questions
+
+retrieval:
+  hybrid:
+    lexical: "BM25"
+    semantic: "vector"
+    fusion: "<weighted | reciprocal-rank>"
+  rerank:
+    enabled: true
+    model: "<reranker / cross-encoder>"
+  top_k: "<smallest k that meets the quality bar>"
+  score_threshold: "<below this -> 'no confident source' -> abstain/escalate>"
+  tiered:
+    enabled: true
+    layers: ["faq", "broader-corpus-e.g.-legislation"]
+
+generation:
+  grounding: "answer only from retrieved passages; do not exceed the evidence"
+  on_no_evidence: "abstain + point to where to look (do NOT use parametric memory)"
+  citations:
+    required: true                # AI Act transparency obligation
+    granularity: "document + section"
+  retrieved_content: "treated as untrusted data, not instructions"
+
+security:
+  sanitise_retrieved_passages: true
+  screen_for_injection_patterns: true
+  human_confirmation_for_sensitive_actions: true
+
+evaluation:
+  golden_dataset_ref: "<path to RAG golden dataset — see rag-evaluatie>"
+  offline_gate: "run retrieval + grounding evals on every prompt/model/index change"
+
+review:
+  last_reviewed: "<YYYY-MM-DD>"
+  reembed_on_embedding_model_change: true

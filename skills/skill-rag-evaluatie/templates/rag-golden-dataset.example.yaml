@@ -1,0 +1,42 @@
+# =============================================================================
+# rag-golden-dataset.example.yaml
+# -----------------------------------------------------------------------------
+# A RAG golden dataset: questions with ideal answers AND the sources that SHOULD
+# be retrieved per question (so retrieval can be scored independently of the
+# final answer). Seed from historical Q&A; have experts add edge cases; expand
+# with AI only under human review; version this file like code (PR review);
+# keep it OUT of any training/fine-tuning set.
+# JSONL is also fine for large sets; this YAML form is for readability.
+# =============================================================================
+
+dataset:
+  name: "<assistant> RAG golden set"
+  version: "<v0.1>"
+  owner_raci: "defines-good: <role> | builds: <role> | curates: <role> | runs-evals: <role>"
+  notes: "Tag entries so you can report quality per slice (e.g. faithfulness on sensitive cases)."
+
+entries:
+  - id: "q-0001"
+    question: "<a common, representative question a citizen would ask>"
+    ideal_answer: "<the ideal grounded answer>"
+    expected_sources:                  # what retrieval SHOULD return (score recall/precision against this)
+      - doc_id: "<source id>"
+        section: "<article/section/chunk>"
+    tags: [common]
+    last_validated: "<YYYY-MM-DD by whom>"
+
+  - id: "q-0002"
+    question: "<an edge case: exception, sensitive situation, legal edge>"
+    ideal_answer: "<ideal answer — may be 'refer to a human' for sensitive cases>"
+    expected_sources:
+      - doc_id: "<source id>"
+        section: "<...>"
+    tags: [edge_case, sensitive]
+    last_validated: "<YYYY-MM-DD by whom>"
+
+  - id: "q-0003"
+    question: "<a question with NO good answer in the corpus>"
+    ideal_answer: "<the assistant should abstain and point to where to look>"
+    expected_sources: []               # nothing should be confidently retrieved -> tests abstain behaviour
+    tags: [abstain, no_source]
+    last_validated: "<YYYY-MM-DD by whom>"

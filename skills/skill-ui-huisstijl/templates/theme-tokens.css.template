@@ -1,0 +1,106 @@
+/* =====================================================================
+   <ORGANISATION> — house-style theme (NL Design System)
+   ---------------------------------------------------------------------
+   How to use this file:
+   1. Fill in the BRAND tokens below with the organisation's real values
+      (from its style guide, or values the developer confirmed).
+   2. Map them to the SEMANTIC / Common tokens. IMPORTANT: replace the
+      placeholder names in section 2 with the actual NL Design System
+      Common token names — see https://nldesignsystem.nl/handboek/huisstijl/design-tokens/
+      so that NLDS components actually pick up these values.
+   3. Load this file in the application and let the components consume it.
+
+   Rules to keep in mind (see SKILL.md):
+   - Run a contrast check on every text/background and UI pair. If a brand
+     pair fails WCAG AA, accessibility wins — adjust the token, don't ship
+     unreadable text. (The wcag-accessibility skill bundles check_contrast.py.)
+   - Reference the official logo and font from their official source.
+     Do not self-host a licensed font or recreate a logo without the right.
+   - Build THIS organisation's theme; don't copy another organisation's.
+
+   The commented values show the Gemeente Amsterdam shape as an example —
+   replace them with the target organisation's confirmed values.
+   ===================================================================== */
+
+:root {
+  /* ---- 1. BRAND tokens — the organisation's raw values --------------
+     These are the only values that change per organisation. Naming is
+     free at this layer. */
+
+  /* Colour — identity */
+  --brand-color-primary:        #______;   /* e.g. Amsterdam red  #EC0000 */
+  --brand-color-on-primary:     #______;   /* text/icons on primary, e.g. #FFFFFF */
+  --brand-color-secondary:      #______;
+  --brand-color-on-secondary:   #______;
+
+  /* Colour — neutrals / surfaces */
+  --brand-color-text:           #______;   /* body text, e.g. Amsterdam black #000000 */
+  --brand-color-text-subtle:    #______;   /* secondary text (watch contrast!) */
+  --brand-color-background:     #FFFFFF;
+  --brand-color-surface:        #______;   /* cards, message bubbles */
+  --brand-color-border:         #______;
+  --brand-color-link:           #______;
+
+  /* Colour — feedback */
+  --brand-color-error:          #______;
+  --brand-color-success:        #______;
+  --brand-color-warning:        #______;
+
+  /* Typography */
+  --brand-font-heading:  "______", system-ui, sans-serif;  /* e.g. "Amsterdam Sans", ... */
+  --brand-font-body:     "______", system-ui, sans-serif;
+  --brand-font-weight-normal: 400;
+  --brand-font-weight-bold:   700;
+
+  /* Shape & spacing */
+  --brand-radius-default: ___px;   /* e.g. 0 for a sharp/formal feel */
+  --brand-radius-pill:    9999px;  /* for chips / quick replies */
+  --brand-space-unit:     ___px;   /* base spacing step, e.g. 8px */
+
+  /* ---- 2. SEMANTIC / Common tokens ---------------------------------
+     Map brand values to the names NLDS components read. REPLACE these
+     placeholder names with the real NLDS Common token names. */
+
+  --color-primary:            var(--brand-color-primary);
+  --color-on-primary:         var(--brand-color-on-primary);
+  --color-text-default:       var(--brand-color-text);
+  --color-text-subtle:        var(--brand-color-text-subtle);
+  --color-background:         var(--brand-color-background);
+  --color-surface:            var(--brand-color-surface);
+  --color-border:             var(--brand-color-border);
+  --color-link:               var(--brand-color-link);
+  --color-feedback-error:     var(--brand-color-error);
+  --color-feedback-success:   var(--brand-color-success);
+  --color-feedback-warning:   var(--brand-color-warning);
+
+  --font-heading:             var(--brand-font-heading);
+  --font-body:                var(--brand-font-body);
+
+  --radius-interactive:       var(--brand-radius-default);
+  --radius-pill:              var(--brand-radius-pill);
+  --space-1:                  var(--brand-space-unit);
+}
+
+/* ---- 3. Optional accessible variants --------------------------------
+   A high-contrast theme is often the cleanest way to satisfy contrast
+   requirements without abandoning the brand. Override only what changes. */
+
+/*
+[data-theme="high-contrast"] {
+  --color-text-default: #000000;
+  --color-background:   #FFFFFF;
+  --color-border:       #000000;
+}
+*/
+
+/* ---- 4. Font loading (only if you have the right to self-host) -------
+   Many government fonts are licensed and must be obtained from the
+   organisation's official source — do not self-host without permission.
+
+@font-face {
+  font-family: "______";
+  src: url("/fonts/______.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+*/
