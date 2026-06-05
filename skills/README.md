@@ -1,29 +1,30 @@
-# skills/
+# Skill library
 
-Your team's Skills go here. One subdirectory per Skill.
+This submission uses a hybrid Approach A/B for responsible public-service digital assistants:
 
-## How to start
+- domain Skills for answer quality, RAG/source governance, behavior testing, compliance intake, evidence packs, and developer release gates;
+- a router Skill that selects and composes the smallest useful Skill set for the user task;
+- a validator Skill for challenge readiness, portability, consistency, framework grounding, and demo evidence.
 
-```powershell
-Copy-Item -Recurse skills/_template skills/<your-skill-name>
-```
+The Skills are portable `SKILL.md` files. They do not require kagent, Kubernetes, GitHub, or a specific coding assistant for their core behavior.
 
-Then edit `skills/<your-skill-name>/SKILL.md`.
+## Skill catalogue
 
-## What lives here already
+| Skill | Purpose |
+|---|---|
+| `citizen-service-answer-quality` | Reviews or drafts citizen-facing answers for source grounding, plain Dutch/B1, uncertainty, refusal behavior, human handoff, and launch blockers. |
+| `rag-source-readiness-governance` | Checks RAG sources for ownership, authority, freshness, metadata, citation precision, no-answer behavior, Common Ground provenance, and NL API Strategie/API contracts. |
+| `public-service-assistant-test-design` | Produces release, regression, adversarial, accessibility, handoff, and source-failure tests with observable pass criteria. |
+| `compliance-intake-assessment` | Routes a digital-assistant use case across AI Act, AVG/GDPR, DPIA, IAMA, Algoritmeregister, governance, and required evidence. |
+| `compliance-evidence-pack-generator` | Turns intake findings into an auditable evidence pack with controls, gaps, owners, and next actions. |
+| `developer-compliance-gate` | Converts evidence gaps into implementation tasks, acceptance criteria, release gates, logging, monitoring, rollback, and security work. |
+| `responsible-assistant-skill-router` | Entry point for selecting and composing Skills, maintaining handoff state, normalizing statuses, and producing readiness decisions. |
+| `skill-library-validator` | Reviews the Skill library itself for mechanical format, modularity, government standards, framework grounding, consistency, safety, and submission readiness. |
 
-- **[_template/](_template/)**, minimal SKILL.md skeleton. Copy this.
+## Recommended entry point
 
-Worked examples live in [docs/example-skills/](../docs/example-skills/) so judges grade your `skills/` against an empty starting line:
+Use `responsible-assistant-skill-router` when the request spans more than one domain or when the right Skill is unclear. It runs the full readiness flow only for explicit pilot, launch, end-to-end, or demo requests; otherwise it routes to the smallest useful Skill set.
 
-- [docs/example-skills/answer-quality-checks/](../docs/example-skills/answer-quality-checks/), Approach A reference Skill end-to-end.
-- [docs/example-skills/framework-validator/](../docs/example-skills/framework-validator/), bonus validation Skill that bundles a script the agent can run.
+## Naming
 
-## Naming rules
-
-- Directory name: lowercase letters, numbers, hyphens; max 64 characters; no leading hyphen; no reserved words (`anthropic`, `claude`).
-- The frontmatter `name` field should match the directory name.
-
-## What a good Skill looks like
-
-See [docs/skill-format.md](../docs/skill-format.md) for the spec and [docs/skill-checklist.md](../docs/skill-checklist.md) for the submission checklist.
+Each Skill directory name matches the frontmatter `name` field. The `_template/` folder remains only as the starter template from the challenge repository.
